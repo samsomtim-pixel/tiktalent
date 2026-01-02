@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Werken bij [BEDRIJFSNAAM] | [FUNCTIE]</title>
+    
+    <!-- Pas deze variabelen aan per klant -->
+    <style>
+        :root {
+            /* KLANT KLEUREN - PAS AAN */
+            --primary: #fe2c55;      /* Hoofdkleur */
+            --primary-dark: #d91a43; /* Donkerdere variant */
+            --accent: #25f4ee;       /* Accent kleur */
+            --bg: #0a0a0a;           /* Achtergrond */
+            --text: #ffffff;         /* Tekst */
+            --text-muted: #a1a1aa;   /* Gedempte tekst */
+            --card-bg: #18181b;      /* Card achtergrond */
+            --border: #27272a;       /* Borders */
+        }
+    </style>
+
+    <!-- Google Analytics / Meta Pixel hier -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 540px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 0 32px;
+        }
+
+        .logo {
+            height: 48px;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(37, 244, 238, 0.1);
+            border: 1px solid rgba(37, 244, 238, 0.3);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* Video embed */
+        .video-container {
+            margin: 32px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--card-bg);
+            aspect-ratio: 9/16;
+            max-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        .video-placeholder {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-muted);
+        }
+
+        .video-placeholder svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        /* USPs */
+        .usps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 32px 0;
+        }
+
+        .usp {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .usp-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+
+        .usp-content h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .usp-content p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Details */
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 32px 0;
+        }
+
+        .detail {
+            padding: 16px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .detail-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Form */
+        .form-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        .form-section h2 {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .form-section .subtitle {
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #52525b;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(254, 44, 85, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Trust signals */
+        .trust {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 24px 0;
+            padding: 16px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .trust-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 32px 0;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        /* Success state */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 48px 24px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message .icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--accent), #10b981);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+        }
+
+        .success-message h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .success-message p {
+            color: var(--text-muted);
+        }
+
+        .form-content.hide {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- KLANT LOGO -->
+            <!-- <img src="/logo.png" alt="[BEDRIJFSNAAM]" class="logo"> -->
+            <div style="font-size: 24px; font-weight: 800; margin-bottom: 24px;">[BEDRIJFSNAAM]</div>
+            
+            <div class="badge">📍 [LOCATIE] • Nu beschikbaar</div>
+            <h1>[FUNCTIE]</h1>
+            <p class="subtitle">[KORTE TAGLINE OF SALARISRANGE]</p>
+        </header>
+
+        <!-- TikTok Video Embed -->
+        <div class="video-container">
+            <!-- Vervang met TikTok embed of eigen video -->
+            <div class="video-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <p>TikTok video embed</p>
+                <p style="font-size: 11px; margin-top: 8px;">Vervang met blockquote embed code</p>
+            </div>
+            
+            <!-- TikTok embed voorbeeld:
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@username/video/VIDEOID" data-video-id="VIDEOID">
+                <script async src="https://www.tiktok.com/embed.js"></script>
+            </blockquote>
+            -->
+        </div>
+
+        <!-- USPs -->
+        <div class="usps">
+            <div class="usp">
+                <div class="usp-icon">💰</div>
+                <div class="usp-content">
+                    <h3>[USP 1 TITEL]</h3>
+                    <p>[USP 1 beschrijving]</p>
+                </div>
+            </div>
+            <div class="usp">
+                <div class="usp-icon">📅</div>
+                <div class="usp-content">
+                    <h3>[USP 2 TITEL]</h3>
+                    <p>[USP 2 beschrijving]</p>
+                </div>
+            </div>
+            <div class="usp">
+                <div class="usp-icon">🚀</div>
+                <div class="usp-content">
+                    <h3>[USP 3 TITEL]</h3>
+                    <p>[USP 3 beschrijving]</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick details -->
+        <div class="details">
+            <div class="detail">
+                <div class="detail-label">Salaris</div>
+                <div class="detail-value">[€XX-XX/uur]</div>
+            </div>
+            <div class="detail">
+                <div class="detail-label">Uren</div>
+                <div class="detail-value">[Fulltime/Parttime]</div>
+            </div>
+            <div class="detail">
+                <div class="detail-label">Start</div>
+                <div class="detail-value">[Per direct]</div>
+            </div>
+            <div class="detail">
+                <div class="detail-label">Ervaring</div>
+                <div class="detail-value">[Niet vereist]</div>
+            </div>
+        </div>
+
+        <!-- Application Form -->
+        <div class="form-section">
+            <div class="form-content">
+                <h2>Direct solliciteren</h2>
+                <p class="subtitle">Vul je gegevens in, we nemen binnen 24 uur contact op.</p>
+
+                <form id="applicationForm" action="[FORM_ENDPOINT]" method="POST">
+                    <!-- Hidden tracking fields -->
+                    <input type="hidden" name="source" value="tiktok">
+                    <input type="hidden" name="campaign" id="campaign" value="">
+                    <input type="hidden" name="vacature" value="[FUNCTIE]">
+                    <input type="hidden" name="bedrijf" value="[BEDRIJFSNAAM]">
+
+                    <div class="form-group">
+                        <label for="naam">Naam *</label>
+                        <input type="text" id="naam" name="naam" required placeholder="Je volledige naam">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefoon">Telefoonnummer *</label>
+                        <input type="tel" id="telefoon" name="telefoon" required placeholder="06 12345678">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required placeholder="jouw@email.nl">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="beschikbaarheid">Wanneer kun je starten?</label>
+                        <select id="beschikbaarheid" name="beschikbaarheid">
+                            <option value="direct">Per direct</option>
+                            <option value="1-2 weken">Binnen 1-2 weken</option>
+                            <option value="1 maand">Binnen 1 maand</option>
+                            <option value="anders">Anders</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivatie">Waarom wil je hier werken? (optioneel)</label>
+                        <textarea id="motivatie" name="motivatie" placeholder="Vertel kort iets over jezelf..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hoe_gevonden">Hoe heb je ons gevonden? *</label>
+                        <select id="hoe_gevonden" name="hoe_gevonden" required>
+                            <option value="">Selecteer...</option>
+                            <option value="tiktok">TikTok</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="vriend">Via een vriend</option>
+                            <option value="google">Google</option>
+                            <option value="anders">Anders</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn">
+                        Verstuur sollicitatie
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <div class="icon">✓</div>
+                <h2>Bedankt voor je sollicitatie!</h2>
+                <p>We nemen binnen 24 uur contact met je op.</p>
+            </div>
+        </div>
+
+        <!-- Trust signals -->
+        <div class="trust">
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Veilig & privé
+            </div>
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Reactie binnen 24u
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 [BEDRIJFSNAAM]. Alle rechten voorbehouden.</p>
+            <p style="margin-top: 8px;">
+                <a href="#">Privacy</a> · <a href="#">Voorwaarden</a>
+            </p>
+            <p style="margin-top: 16px; opacity: 0.5;">Powered by TikTalent</p>
+        </footer>
+    </div>
+
+    <script>
+        // Capture UTM parameters
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const campaign = urlParams.get('utm_campaign') || urlParams.get('campaign') || 'direct';
+            document.getElementById('campaign').value = campaign;
+
+            // Pre-select TikTok if utm_source is tiktok
+            const source = urlParams.get('utm_source');
+            if (source === 'tiktok') {
+                document.getElementById('hoe_gevonden').value = 'tiktok';
+            }
+        });
+
+        // Form submission
+        document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const formContent = document.querySelector('.form-content');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Versturen...';
+
+            try {
+                // Option 1: Send to your own API
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                
+                // Uncomment and adjust for your backend:
+                /*
+                const response = await fetch('/api/sollicitatie', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) throw new Error('Submission failed');
+                */
+
+                // Option 2: Send to webhook (Zapier, Make, etc.)
+                /*
+                await fetch('https://hooks.zapier.com/hooks/catch/xxxxx/xxxxx/', {
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                });
+                */
+
+                // Option 3: Send to Formspree
+                /*
+                await fetch('https://formspree.io/f/xxxxx', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                */
+
+                // For demo: just show success after delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                // Show success
+                formContent.classList.add('hide');
+                successMessage.classList.add('show');
+
+                // Track conversion (Google Analytics)
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'sollicitatie_verstuurd', {
+                        'event_category': 'conversie',
+                        'event_label': data.vacature
+                    });
+                }
+
+                // Track conversion (Meta Pixel)
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Er ging iets mis. Probeer het opnieuw of neem contact met ons op.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Verstuur sollicitatie →';
+            }
+        });
+    </script>
+</body>
+</html>
