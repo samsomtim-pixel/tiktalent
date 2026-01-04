@@ -111,60 +111,78 @@ export default function VoorbeeldenPage() {
           </div>
         </div>
 
-        {/* Mobile Menu Overlay */}
+        {/* Mobile Menu Overlay - Full Screen */}
         {mobileMenuOpen && (
-          <div className="md:hidden fixed inset-0 top-[73px] bg-[#0a0a0a] z-50 border-t border-white/5">
-            <div className="px-4 py-8 space-y-4">
-              <Link 
+          <div className="md:hidden fixed inset-0 bg-black/95 z-50 flex flex-col animate-fadeIn">
+            {/* Header with logo + close */}
+            <div className="flex justify-between items-center p-4 md:p-6 border-b border-gray-800">
+              <div className="text-xl md:text-2xl font-black flex">
+                <span className="text-[#25f4ee]">Tik</span>
+                <span className="text-[#fe2c55]">Talent</span>
+              </div>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-white text-4xl hover:text-[#fe2c55] transition-colors leading-none"
+                aria-label="Close menu"
+              >
+                ×
+              </button>
+            </div>
+
+            {/* Navigation links - full screen, centered, large */}
+            <nav className="flex-1 flex flex-col justify-center items-center gap-6 md:gap-8 p-8">
+              <Link
                 href="/creators"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Creators
               </Link>
-              <Link 
+              <Link
                 href="/brands"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Brands
               </Link>
-              <a 
-                href="/#werkwijze" 
+              <a
+                href="/#werkwijze"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Werkwijze
               </a>
-              <a 
-                href="/#pakketten" 
+              <a
+                href="/#pakketten"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Pakketten
               </a>
-              <Link 
+              <Link
                 href="/voorbeelden"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Voorbeelden
               </Link>
-              <Link 
+              <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Inloggen
               </Link>
-              <a 
-                href="/#contact" 
+
+              {/* CTA button at bottom */}
+              <a
+                href="/#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-5 py-3 rounded-lg text-base font-semibold text-center mt-4"
+                className="mt-8 bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
               >
                 Gratis adviesgesprek
               </a>
-            </div>
+            </nav>
           </div>
         )}
       </nav>
