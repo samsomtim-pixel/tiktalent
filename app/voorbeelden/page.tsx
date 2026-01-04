@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const videos = [
@@ -38,6 +38,18 @@ const VideoCard = ({ video }: { video: typeof videos[0] }) => {
 
 export default function VoorbeeldenPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
@@ -113,76 +125,88 @@ export default function VoorbeeldenPage() {
 
         {/* Mobile Menu Overlay - Full Screen */}
         {mobileMenuOpen && (
-          <div className="md:hidden fixed inset-0 bg-black/95 z-50 flex flex-col animate-fadeIn">
-            {/* Header with logo + close */}
-            <div className="flex justify-between items-center p-4 md:p-6 border-b border-gray-800">
-              <div className="text-xl md:text-2xl font-black flex">
+          <div 
+            className="md:hidden fixed inset-0 bg-black z-[9999] overflow-hidden"
+            style={{ 
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: '#000000'
+            }}
+          >
+            {/* Header: Logo + Close */}
+            <div className="flex justify-between items-center p-6 border-b border-gray-800 bg-black">
+              <div className="text-2xl font-black flex">
                 <span className="text-[#25f4ee]">Tik</span>
                 <span className="text-[#fe2c55]">Talent</span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-white text-4xl hover:text-[#fe2c55] transition-colors leading-none"
+                className="text-white text-4xl leading-none hover:text-[#fe2c55] transition-colors"
                 aria-label="Close menu"
               >
                 ×
               </button>
             </div>
 
-            {/* Navigation links - full screen, centered, large */}
-            <nav className="flex-1 flex flex-col justify-center items-center gap-6 md:gap-8 p-8">
+            {/* Navigation - vertically centered */}
+            <div className="h-[calc(100vh-80px)] flex flex-col justify-center items-center gap-8 bg-black">
               <Link
                 href="/creators"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
+                className="text-white text-2xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Creators
               </Link>
               <Link
                 href="/brands"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
+                className="text-white text-2xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Brands
               </Link>
               <a
                 href="/#werkwijze"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
+                className="text-white text-2xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Werkwijze
               </a>
               <a
                 href="/#pakketten"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
+                className="text-white text-2xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Pakketten
               </a>
               <Link
                 href="/voorbeelden"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
+                className="text-white text-2xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Voorbeelden
               </Link>
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-white text-2xl md:text-3xl font-medium hover:text-[#25f4ee] transition-colors"
+                className="text-white text-2xl font-medium hover:text-[#25f4ee] transition-colors"
               >
                 Inloggen
               </Link>
 
-              {/* CTA button at bottom */}
+              {/* CTA button */}
               <a
                 href="/#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-8 bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
+                className="mt-8 bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-12 py-4 rounded-lg text-lg font-semibold w-[80%] max-w-md text-center hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
               >
                 Gratis adviesgesprek
               </a>
-            </nav>
+            </div>
           </div>
         )}
       </nav>
