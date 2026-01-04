@@ -12,20 +12,43 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
-          <div className="text-2xl font-black flex">
-            <span className="text-[#25f4ee]">Tik</span>
-            <span className="text-[#fe2c55]">Talent</span>
+          {/* Left group: Logo + Creators + Brands */}
+          <div className="flex items-center gap-6">
+            <div className="text-2xl font-black flex">
+              <span className="text-[#25f4ee]">Tik</span>
+              <span className="text-[#fe2c55]">Talent</span>
+            </div>
+            <Link 
+              href="/creators"
+              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+            >
+              Creators
+            </Link>
+            <Link 
+              href="/brands"
+              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+            >
+              Brands
+            </Link>
           </div>
-          <div className="flex items-center gap-8">
-            <a href="#werkwijze" className="text-zinc-500 hover:text-white text-sm font-medium transition-colors hidden sm:block">
+
+          {/* Right group: Werkwijze | Pakketten | Voorbeelden | Inloggen | CTA */}
+          <div className="flex items-center gap-6">
+            <a href="#werkwijze" className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden sm:block">
               Werkwijze
             </a>
-            <a href="#pakketten" className="text-zinc-500 hover:text-white text-sm font-medium transition-colors hidden sm:block">
+            <a href="#pakketten" className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden sm:block">
               Pakketten
             </a>
             <Link 
+              href="/voorbeelden"
+              className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden sm:block"
+            >
+              Voorbeelden
+            </Link>
+            <Link 
               href="/login"
-              className="text-zinc-500 hover:text-white text-sm font-medium transition-colors"
+              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
             >
               Inloggen
             </Link>
@@ -40,57 +63,54 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section className="min-h-screen flex items-center pt-24 relative">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#25f4ee]/10 border border-[#25f4ee]/30 rounded-full text-[13px] text-[#25f4ee] mb-6">
-              <span className="w-1.5 h-1.5 bg-[#25f4ee] rounded-full animate-pulse" />
-              Nu beschikbaar in Nederland
+      <section className="min-h-screen flex items-center pt-24">
+        <div className="max-w-7xl mx-auto px-6 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Text Content */}
+            <div className="text-center lg:text-left order-1">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#25f4ee]/10 border border-[#25f4ee]/30 rounded-full text-[13px] text-[#25f4ee] mb-6">
+                <span className="w-1.5 h-1.5 bg-[#25f4ee] rounded-full animate-pulse" />
+                Nu beschikbaar in Nederland
+              </div>
+              <h1 className="text-5xl sm:text-7xl font-black leading-[1] mb-6">
+                Vind Gen Z talent via{' '}
+                <span className="bg-gradient-to-r from-[#25f4ee] to-[#fe2c55] bg-clip-text text-transparent">
+                  TikTok
+                </span>
+              </h1>
+              <p className="text-lg text-zinc-500 leading-relaxed mb-10 max-w-lg mx-auto lg:mx-0">
+                Vergeet Indeed en LinkedIn. 40% van Gen Z zoekt via TikTok. Wij maken virale vacaturecontent die jouw doelgroep wél bereikt.
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <a 
+                  href="#contact" 
+                  className="bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-6 py-3.5 rounded-lg font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
+                >
+                  Start je eerste campagne →
+                </a>
+                <a 
+                  href="#werkwijze" 
+                  className="border border-white/20 text-white px-6 py-3.5 rounded-lg font-semibold hover:bg-white/5 hover:border-white/40 transition-all"
+                >
+                  Bekijk hoe het werkt
+                </a>
+              </div>
             </div>
-            <h1 className="text-5xl sm:text-7xl font-black leading-[1] mb-6">
-              Vind Gen Z talent via{' '}
-              <span className="bg-gradient-to-r from-[#25f4ee] to-[#fe2c55] bg-clip-text text-transparent">
-                TikTok
-              </span>
-            </h1>
-            <p className="text-lg text-zinc-500 leading-relaxed mb-10 max-w-lg">
-              Vergeet Indeed en LinkedIn. 40% van Gen Z zoekt via TikTok. Wij maken virale vacaturecontent die jouw doelgroep wél bereikt.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a 
-                href="#contact" 
-                className="bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-6 py-3.5 rounded-lg font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
-              >
-                Start je eerste campagne →
-              </a>
-              <a 
-                href="#werkwijze" 
-                className="border border-white/20 text-white px-6 py-3.5 rounded-lg font-semibold hover:bg-white/5 hover:border-white/40 transition-all"
-              >
-                Bekijk hoe het werkt
-              </a>
-            </div>
-          </div>
-        </div>
 
-        {/* Phone mockup - hidden on mobile */}
-        <div className="absolute right-[-100px] top-1/2 -translate-y-1/2 hidden lg:block">
-          <div className="w-[280px] h-[560px] bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] rounded-[40px] border-[3px] border-[#333] relative overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.5)] animate-float">
-            <div className="absolute inset-2 bg-[#0a0a0a] rounded-[32px] overflow-hidden">
-              <div className="h-full flex flex-col">
-                <div className="flex-1 bg-gradient-to-b from-[#1e3a5f] to-[#0f1c2e] flex items-center justify-center relative">
-                  <div className="w-[60px] h-[60px] bg-white/20 rounded-full flex items-center justify-center">
-                    <div className="w-0 h-0 border-l-[20px] border-l-white border-y-[12px] border-y-transparent ml-1.5" />
-                  </div>
-                  <div className="absolute bottom-16 left-3 right-16">
-                    <div className="font-bold text-sm mb-1">@jouwbedrijf</div>
-                    <div className="text-xs text-white/80">Wij zoeken nieuwe collega's! 🚀 #vacature</div>
-                  </div>
-                </div>
-                <div className="h-[50px] bg-black flex justify-around items-center px-5">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className={`${i === 2 ? 'w-9 h-7 bg-white rounded-lg' : 'w-6 h-6 bg-white/30 rounded'}`} />
-                  ))}
+            {/* Phone mockup */}
+            <div className="order-2 flex justify-center lg:justify-end">
+              <div className="w-[280px] md:w-[320px] lg:w-[380px] h-[560px] md:h-[640px] lg:h-[760px] bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] rounded-[40px] border-[3px] border-[#333] relative overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.5)] animate-float">
+                <div className="absolute inset-2 bg-[#0a0a0a] rounded-[32px] overflow-hidden">
+                  <video 
+                    className="w-full h-full object-cover rounded-[2.5rem]"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                  >
+                    <source src="/hero-video.mp4" type="video/mp4" />
+                  </video>
                 </div>
               </div>
             </div>
@@ -119,6 +139,8 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SOCIAL PROOF SECTION - Add after first pilots */}
+      
       {/* Problem/Solution */}
       <section className="py-28">
         <div className="max-w-6xl mx-auto px-6">
@@ -196,18 +218,19 @@ export default function Home() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { name: 'Try-out', price: '€750', period: 'eenmalig', features: ['2 video\'s', '€100 ad spend', '1 vacature', 'Basis reporting', 'Perfect om te testen'], featured: false },
-              { name: 'Starter', price: '€1.250', period: 'per maand', features: ['4 video\'s', '€250 ad spend', '2 vacatures', 'Maandelijkse call', 'Performance dashboard'], featured: false },
-              { name: 'Growth', price: '€2.250', period: 'per maand', features: ['8 video\'s', '€500 ad spend', 'Dedicated landing page', 'UTM tracking & funnel', 'Wekelijkse reporting'], featured: true },
-              { name: 'Performance', price: '€3.500', period: 'per maand', features: ['12 video\'s', '€1.000 ad spend', 'Dedicated creator', 'A/B testing', 'Cost-per-hire tracking'], featured: false },
+              { name: 'Try-out', microcopy: 'Perfect voor je eerste testcampagne', price: '€750', period: 'eenmalig', features: ['2 video\'s', 'Standaard UGC creator uit netwerk', '€100 ad spend', '1 vacature', 'Basis reporting', 'Perfect om te testen'], featured: false },
+              { name: 'Starter', microcopy: 'Ideaal voor groeiende bedrijven', price: '€1.250', period: 'per maand', features: ['4 video\'s', 'Keuze uit 5 UGC creators', '€250 ad spend', '2 vacatures', 'Maandelijkse call', 'Performance dashboard'], featured: false },
+              { name: 'Growth', microcopy: 'Onze populairste keuze', price: '€2.250', period: 'per maand', features: ['8 video\'s', 'Micro-influencer included', '€500 ad spend', 'Dedicated landing page', 'UTM tracking & funnel', 'Wekelijkse reporting'], featured: true },
+              { name: 'Performance', microcopy: 'Voor serieuze volume recruitment', price: '€3.500', period: 'per maand', features: ['12 video\'s', 'Dedicated creator + macro optie', '€1.000 ad spend', 'A/B testing', 'Cost-per-hire tracking'], featured: false },
             ].map((pkg, i) => (
               <div key={i} className={`p-8 rounded-2xl border relative transition-all hover:border-white/20 ${pkg.featured ? 'bg-gradient-to-b from-[#fe2c55]/10 to-[#fe2c55]/[0.02] border-[#fe2c55]' : 'bg-white/[0.02] border-white/10'}`}>
                 {pkg.featured && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#fe2c55] text-white px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide">
-                    Populair
+                    POPULAIR
                   </div>
                 )}
-                <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
+                <h3 className="text-xl font-bold mb-1">{pkg.name}</h3>
+                <p className="text-sm text-gray-500 italic mb-2">{pkg.microcopy}</p>
                 <div className="text-4xl font-black mb-1">{pkg.price}</div>
                 <div className="text-zinc-500 text-sm mb-6">{pkg.period}</div>
                 <ul className="space-y-3 mb-6">
@@ -246,6 +269,24 @@ export default function Home() {
                 Plan je gesprek →
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-black mb-4">Klaar om te starten?</h2>
+            <p className="text-zinc-500 text-lg mb-8 max-w-lg mx-auto">
+              Plan een gratis adviesgesprek. Geen verplichtingen.
+            </p>
+            <a 
+              href="mailto:tim@tiktalent.nl" 
+              className="inline-block bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-8 py-4 rounded-lg font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
+            >
+              Plan je gesprek →
+            </a>
           </div>
         </div>
       </section>
