@@ -33,6 +33,7 @@ const creators: Creator[] = [
 ];
 
 export default function CreatorsPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [genderFilter, setGenderFilter] = useState<Gender>('all');
   const [ageFilter, setAgeFilter] = useState<Age>('all');
   const [sectorFilter, setSectorFilter] = useState<Sector>('all');
@@ -69,65 +70,140 @@ export default function CreatorsPage() {
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-5 flex justify-between items-center">
           {/* Left group: Logo + Creators + Brands */}
-          <div className="flex items-center gap-6">
-            <Link href="/" className="text-2xl font-black flex">
+          <div className="flex items-center gap-4 md:gap-6">
+            <Link href="/" className="text-xl md:text-2xl font-black flex">
               <span className="text-[#25f4ee]">Tik</span>
               <span className="text-[#fe2c55]">Talent</span>
             </Link>
             <Link 
               href="/creators"
-              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+              className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden md:block"
             >
               Creators
             </Link>
             <Link 
               href="/brands"
-              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+              className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden md:block"
             >
               Brands
             </Link>
           </div>
 
-          {/* Right group: Werkwijze | Pakketten | Voorbeelden | Inloggen | CTA */}
-          <div className="flex items-center gap-6">
-            <a href="/#werkwijze" className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden sm:block">
-              Werkwijze
-            </a>
-            <a href="/#pakketten" className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden sm:block">
-              Pakketten
-            </a>
-            <Link 
-              href="/voorbeelden"
-              className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden sm:block"
+          {/* Right group: Desktop nav + Mobile hamburger */}
+          <div className="flex items-center gap-4 md:gap-6">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-6">
+              <a href="/#werkwijze" className="text-gray-400 hover:text-white text-sm font-medium transition-colors">
+                Werkwijze
+              </a>
+              <a href="/#pakketten" className="text-gray-400 hover:text-white text-sm font-medium transition-colors">
+                Pakketten
+              </a>
+              <Link 
+                href="/voorbeelden"
+                className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+              >
+                Voorbeelden
+              </Link>
+              <Link 
+                href="/login"
+                className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+              >
+                Inloggen
+              </Link>
+              <a 
+                href="/#contact" 
+                className="bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
+              >
+                Gratis adviesgesprek
+              </a>
+            </div>
+
+            {/* Mobile Hamburger */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden text-white p-2"
+              aria-label="Menu"
             >
-              Voorbeelden
-            </Link>
-            <Link 
-              href="/login"
-              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
-            >
-              Inloggen
-            </Link>
-            <a 
-              href="/#contact" 
-              className="bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
-            >
-              Gratis adviesgesprek
-            </a>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        {mobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 top-[73px] bg-[#0a0a0a] z-50 border-t border-white/5">
+            <div className="px-4 py-8 space-y-4">
+              <Link 
+                href="/creators"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Creators
+              </Link>
+              <Link 
+                href="/brands"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Brands
+              </Link>
+              <a 
+                href="/#werkwijze" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Werkwijze
+              </a>
+              <a 
+                href="/#pakketten" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Pakketten
+              </a>
+              <Link 
+                href="/voorbeelden"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Voorbeelden
+              </Link>
+              <Link 
+                href="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Inloggen
+              </Link>
+              <a 
+                href="/#contact" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="block bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-5 py-3 rounded-lg text-base font-semibold text-center mt-4"
+              >
+                Gratis adviesgesprek
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero */}
-      <section className="pt-32 pb-16">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="pt-24 md:pt-32 py-8 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
           <div className="text-center max-w-2xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl font-black mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-4">
               Ons Gen Z Creator Netwerk
             </h1>
-            <p className="text-lg text-zinc-500">
+            <p className="text-base md:text-lg text-zinc-500">
               20+ handpicked creators die jouw vacatures omzetten in sollicitaties
             </p>
           </div>
@@ -136,8 +212,8 @@ export default function CreatorsPage() {
 
       {/* Filter Bar */}
       <section className="py-8 border-y border-white/5">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-wrap items-center gap-4">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="flex flex-wrap items-center gap-3 md:gap-4">
             <select
               value={genderFilter}
               onChange={(e) => setGenderFilter(e.target.value as Gender)}
@@ -182,9 +258,9 @@ export default function CreatorsPage() {
       </section>
 
       {/* Creator Grid */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-8 md:py-12">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {filteredCreators.map((creator) => (
               <div
                 key={creator.id}
@@ -251,12 +327,12 @@ export default function CreatorsPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-20 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-black mb-2">Eigen team of custom influencer?</h2>
+      <section className="py-8 md:py-16 border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="text-center mb-6 md:mb-8">
+            <h2 className="text-2xl md:text-3xl font-black mb-2">Eigen team of custom influencer?</h2>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 justify-center max-w-md mx-auto">
             <button className="border border-white/20 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/5 hover:border-white/40 transition-all">
               Upload eigen content
             </button>
@@ -268,9 +344,9 @@ export default function CreatorsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-10 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-          <div className="text-2xl font-black flex">
+      <footer className="py-8 md:py-10 border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-xl md:text-2xl font-black flex">
             <span className="text-[#25f4ee]">Tik</span>
             <span className="text-[#fe2c55]">Talent</span>
           </div>

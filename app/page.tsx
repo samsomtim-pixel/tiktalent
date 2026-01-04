@@ -1,8 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
       {/* Grain overlay */}
@@ -11,86 +14,161 @@ export default function Home() {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-5 flex justify-between items-center">
           {/* Left group: Logo + Creators + Brands */}
-          <div className="flex items-center gap-6">
-            <div className="text-2xl font-black flex">
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="text-xl md:text-2xl font-black flex">
               <span className="text-[#25f4ee]">Tik</span>
               <span className="text-[#fe2c55]">Talent</span>
             </div>
             <Link 
               href="/creators"
-              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+              className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden md:block"
             >
               Creators
             </Link>
             <Link 
               href="/brands"
-              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+              className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden md:block"
             >
               Brands
             </Link>
           </div>
 
-          {/* Right group: Werkwijze | Pakketten | Voorbeelden | Inloggen | CTA */}
-          <div className="flex items-center gap-6">
-            <a href="#werkwijze" className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden sm:block">
-              Werkwijze
-            </a>
-            <a href="#pakketten" className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden sm:block">
-              Pakketten
-            </a>
-            <Link 
-              href="/voorbeelden"
-              className="text-gray-400 hover:text-white text-sm font-medium transition-colors hidden sm:block"
+          {/* Right group: Desktop nav + Mobile hamburger */}
+          <div className="flex items-center gap-4 md:gap-6">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-6">
+              <a href="#werkwijze" className="text-gray-400 hover:text-white text-sm font-medium transition-colors">
+                Werkwijze
+              </a>
+              <a href="#pakketten" className="text-gray-400 hover:text-white text-sm font-medium transition-colors">
+                Pakketten
+              </a>
+              <Link 
+                href="/voorbeelden"
+                className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+              >
+                Voorbeelden
+              </Link>
+              <Link 
+                href="/login"
+                className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+              >
+                Inloggen
+              </Link>
+              <a 
+                href="#contact" 
+                className="bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
+              >
+                Gratis adviesgesprek
+              </a>
+            </div>
+
+            {/* Mobile Hamburger */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden text-white p-2"
+              aria-label="Menu"
             >
-              Voorbeelden
-            </Link>
-            <Link 
-              href="/login"
-              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
-            >
-              Inloggen
-            </Link>
-            <a 
-              href="#contact" 
-              className="bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
-            >
-              Gratis adviesgesprek
-            </a>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        {mobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 top-[73px] bg-[#0a0a0a] z-50 border-t border-white/5">
+            <div className="px-4 py-8 space-y-4">
+              <Link 
+                href="/creators"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Creators
+              </Link>
+              <Link 
+                href="/brands"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Brands
+              </Link>
+              <a 
+                href="#werkwijze" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Werkwijze
+              </a>
+              <a 
+                href="#pakketten" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Pakketten
+              </a>
+              <Link 
+                href="/voorbeelden"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Voorbeelden
+              </Link>
+              <Link 
+                href="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-gray-400 hover:text-white text-base font-medium transition-colors py-2"
+              >
+                Inloggen
+              </Link>
+              <a 
+                href="#contact" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="block bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-5 py-3 rounded-lg text-base font-semibold text-center mt-4"
+              >
+                Gratis adviesgesprek
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero */}
-      <section className="min-h-screen flex items-center pt-24">
-        <div className="max-w-7xl mx-auto px-6 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="min-h-screen flex items-center pt-24 py-8 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Text Content */}
             <div className="text-center lg:text-left order-1">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#25f4ee]/10 border border-[#25f4ee]/30 rounded-full text-[13px] text-[#25f4ee] mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#25f4ee]/10 border border-[#25f4ee]/30 rounded-full text-[11px] md:text-[13px] text-[#25f4ee] mb-4 md:mb-6">
                 <span className="w-1.5 h-1.5 bg-[#25f4ee] rounded-full animate-pulse" />
                 Nu beschikbaar in Nederland
               </div>
-              <h1 className="text-5xl sm:text-7xl font-black leading-[1] mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[1] mb-4 md:mb-6">
                 Vind Gen Z talent via{' '}
                 <span className="bg-gradient-to-r from-[#25f4ee] to-[#fe2c55] bg-clip-text text-transparent">
                   TikTok
                 </span>
               </h1>
-              <p className="text-lg text-zinc-500 leading-relaxed mb-10 max-w-lg mx-auto lg:mx-0">
+              <p className="text-base md:text-lg text-zinc-500 leading-relaxed mb-6 md:mb-10 max-w-lg mx-auto lg:mx-0">
                 Vergeet Indeed en LinkedIn. 40% van Gen Z zoekt via TikTok. Wij maken virale vacaturecontent die jouw doelgroep wél bereikt.
               </p>
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col md:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                 <a 
                   href="#contact" 
-                  className="bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-6 py-3.5 rounded-lg font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all"
+                  className="bg-gradient-to-r from-[#fe2c55] to-[#ff6b6b] text-white px-6 py-3.5 rounded-lg font-semibold hover:translate-y-[-2px] hover:shadow-[0_10px_40px_rgba(254,44,85,0.3)] transition-all text-center md:text-left"
                 >
                   Start je eerste campagne →
                 </a>
                 <a 
                   href="#werkwijze" 
-                  className="border border-white/20 text-white px-6 py-3.5 rounded-lg font-semibold hover:bg-white/5 hover:border-white/40 transition-all"
+                  className="border border-white/20 text-white px-6 py-3.5 rounded-lg font-semibold hover:bg-white/5 hover:border-white/40 transition-all text-center md:text-left"
                 >
                   Bekijk hoe het werkt
                 </a>
@@ -99,7 +177,7 @@ export default function Home() {
 
             {/* Phone mockup */}
             <div className="order-2 flex justify-center lg:justify-end">
-              <div className="w-[280px] md:w-[320px] lg:w-[380px] h-[560px] md:h-[640px] lg:h-[760px] bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] rounded-[40px] border-[3px] border-[#333] relative overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.5)] animate-float">
+              <div className="w-[240px] md:w-[320px] lg:w-[380px] h-[480px] md:h-[640px] lg:h-[760px] bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] rounded-[40px] border-[3px] border-[#333] relative overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.5)] animate-float">
                 <div className="absolute inset-2 bg-[#0a0a0a] rounded-[32px] overflow-hidden">
                   <video 
                     className="w-full h-full object-cover rounded-[2.5rem]"
@@ -119,9 +197,9 @@ export default function Home() {
       </section>
 
       {/* Stats */}
-      <section className="py-20 border-y border-white/5">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+      <section className="py-8 md:py-16 border-y border-white/5">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-10">
             {[
               { value: '40%', label: 'van Gen Z zoekt via TikTok' },
               { value: '€0.50', label: 'gemiddelde cost per click' },
@@ -142,13 +220,13 @@ export default function Home() {
       {/* SOCIAL PROOF SECTION - Add after first pilots */}
       
       {/* Problem/Solution */}
-      <section className="py-28">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center max-w-xl mx-auto mb-16">
-            <h2 className="text-4xl font-black mb-4">Waarom traditionele werving niet meer werkt</h2>
-            <p className="text-zinc-500 text-lg">Gen Z zit niet op Indeed. Ze scrollen door TikTok.</p>
+      <section className="py-8 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="text-center max-w-xl mx-auto mb-8 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-black mb-4">Waarom traditionele werving niet meer werkt</h2>
+            <p className="text-zinc-500 text-base md:text-lg">Gen Z zit niet op Indeed. Ze scrollen door TikTok.</p>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div className="p-10 rounded-2xl border border-[#fe2c55]/20 bg-gradient-to-b from-[#fe2c55]/5 to-transparent">
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <span className="text-[#fe2c55]">✕</span> Oude aanpak
@@ -186,13 +264,13 @@ export default function Home() {
       </section>
 
       {/* Process */}
-      <section id="werkwijze" className="py-28 bg-gradient-to-b from-transparent via-[#25f4ee]/[0.02] to-transparent">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center max-w-xl mx-auto mb-16">
-            <h2 className="text-4xl font-black mb-4">Van briefing tot sollicitatie in 7 dagen</h2>
-            <p className="text-zinc-500 text-lg">Wij regelen alles: script, creators, productie en ads.</p>
+      <section id="werkwijze" className="py-8 md:py-16 bg-gradient-to-b from-transparent via-[#25f4ee]/[0.02] to-transparent">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="text-center max-w-xl mx-auto mb-8 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-black mb-4">Van briefing tot sollicitatie in 7 dagen</h2>
+            <p className="text-zinc-500 text-base md:text-lg">Wij regelen alles: script, creators, productie en ads.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {[
               { num: '01', title: 'Briefing', desc: 'We bespreken je vacature, doelgroep en tone of voice. Wat maakt werken bij jou uniek?' },
               { num: '02', title: 'Scripts & Creators', desc: 'AI genereert platformoptimized scripts. We matchen Nederlandse creators die bij je merk passen.' },
@@ -210,13 +288,13 @@ export default function Home() {
       </section>
 
       {/* Packages */}
-      <section id="pakketten" className="py-28">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center max-w-xl mx-auto mb-16">
-            <h2 className="text-4xl font-black mb-4">Transparante pakketten</h2>
-            <p className="text-zinc-500 text-lg">Geen verborgen kosten. Ad spend inbegrepen.</p>
+      <section id="pakketten" className="py-8 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="text-center max-w-xl mx-auto mb-8 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-black mb-4">Transparante pakketten</h2>
+            <p className="text-zinc-500 text-base md:text-lg">Geen verborgen kosten. Ad spend inbegrepen.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {[
               { name: 'Try-out', microcopy: 'Perfect voor je eerste testcampagne', price: '€750', period: 'eenmalig', features: ['2 video\'s', 'Standaard UGC creator uit netwerk', '€100 ad spend', '1 vacature', 'Basis reporting', 'Perfect om te testen'], featured: false },
               { name: 'Starter', microcopy: 'Ideaal voor groeiende bedrijven', price: '€1.250', period: 'per maand', features: ['4 video\'s', 'Keuze uit 5 UGC creators', '€250 ad spend', '2 vacatures', 'Maandelijkse call', 'Performance dashboard'], featured: false },
@@ -253,13 +331,13 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section id="contact" className="py-28">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="bg-gradient-to-r from-[#fe2c55]/10 to-[#25f4ee]/10 border border-white/10 rounded-3xl p-16 text-center relative overflow-hidden">
+      <section id="contact" className="py-8 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="bg-gradient-to-r from-[#fe2c55]/10 to-[#25f4ee]/10 border border-white/10 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(254,44,85,0.1)_0%,transparent_50%)] animate-spin-slow" />
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-5xl font-black mb-4">Klaar om Gen Z te bereiken?</h2>
-              <p className="text-zinc-500 text-lg mb-8 max-w-lg mx-auto">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4">Klaar om Gen Z te bereiken?</h2>
+              <p className="text-zinc-500 text-base md:text-lg mb-6 md:mb-8 max-w-lg mx-auto">
                 Plan een gratis adviesgesprek. We bespreken je vacatures en laten zien wat mogelijk is.
               </p>
               <a 
@@ -274,11 +352,11 @@ export default function Home() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-28">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="py-8 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
           <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-black mb-4">Klaar om te starten?</h2>
-            <p className="text-zinc-500 text-lg mb-8 max-w-lg mx-auto">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4">Klaar om te starten?</h2>
+            <p className="text-zinc-500 text-base md:text-lg mb-6 md:mb-8 max-w-lg mx-auto">
               Plan een gratis adviesgesprek. Geen verplichtingen.
             </p>
             <a 
